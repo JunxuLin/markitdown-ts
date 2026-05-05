@@ -1,5 +1,5 @@
 {
-  "name": "@junxulin/markitdown-ts",
+  "name": "@carllin/markitdown-ts",
   "version": "0.0.10",
   "description": "TypeScript port of markitdown with EPUB chapter-split support",
   "keywords": [
