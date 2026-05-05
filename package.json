@@ -1,18 +1,23 @@
 {
-  "name": "markitdown-ts",
+  "name": "@junxulin/markitdown-ts",
   "version": "0.0.10",
-  "description": "",
-  "keywords": [],
-  "homepage": "https://github.com/dead8309/markitdown-ts#readme",
+  "description": "TypeScript port of markitdown with EPUB chapter-split support",
+  "keywords": [
+    "markitdown",
+    "markdown",
+    "epub",
+    "converter"
+  ],
+  "homepage": "https://github.com/JunxuLin/markitdown-ts#readme",
   "bugs": {
-    "url": "https://github.com/dead8309/markitdown-ts/issues"
+    "url": "https://github.com/JunxuLin/markitdown-ts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dead8309/markitdown-ts.git"
+    "url": "git+https://github.com/JunxuLin/markitdown-ts.git"
   },
   "license": "MIT",
-  "author": "Vaibhav Raj",
+  "author": "JunxuLin",
   "sideEffects": false,
   "exports": {
     ".": {

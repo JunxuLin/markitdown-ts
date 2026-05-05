@@ -98,4 +98,4 @@ __tests__/runner/*
 lib/**/*
 
 # IntelliJ IDE project files
-.idea/
+.idea/.npmrc
