@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/dead8309/markitdown-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/dead8309/markitdown/actions/workflows/ci.yml)
 
-`markitdown-ts` is a TypeScript library designed for converting various file formats to Markdown. It can process fiiles from local paths, URLs, or directly from in-memory buffers, making it ideal for serverless and edge environments like Supabase Functions or Cloudflare Workers.
+`markitdown-ts` is a TypeScript library designed for converting various file formats to Markdown. It can process files from local paths, URLs, or directly from in-memory buffers, making it ideal for serverless and edge environments like Supabase Functions or Cloudflare Workers.
 
 It is a TypeScript implementation of the original `markitdown` [Python library.](https://github.com/microsoft/markitdown) and is suitable for indexing, text analysis, and other applications that benefit from structured text.
 
@@ -11,6 +11,7 @@ It supports:
 - [x] PDF
 - [x] Word (.docx)
 - [x] Excel (.xlsx)
+- [x] EPUB (with chapter splitting, multi-language support, and image extraction)
 - [x] Images (EXIF metadata extraction and optional LLM-based description)
 - [x] Audio (EXIF metadata extraction only)
 - [x] HTML
@@ -109,6 +110,97 @@ try {
 }
 ```
 
+## EPUB Conversion
+
+The EPUB converter supports splitting books into per-chapter Markdown files, extracting images, and auto-detecting the book's language for proper chapter heading recognition.
+
+### Basic EPUB Conversion
+
+```typescript
+import { MarkItDown } from "markitdown-ts";
+
+const markitdown = new MarkItDown();
+const result = await markitdown.convert("book.epub");
+console.log(result?.markdown); // full book as a single Markdown string
+```
+
+### Chapter Splitting
+
+Split the EPUB into individual Markdown files organized by front-matter, chapters, and back-matter:
+
+```typescript
+import { MarkItDown } from "markitdown-ts";
+import * as path from "path";
+
+const markitdown = new MarkItDown();
+const result = await markitdown.convert("book.epub", {
+  split_by_chapter: true,
+  chapters_output_dir: "./output/my-book",
+  save_images: true,     // extract and save images to ./output/my-book/assets/
+  language: "en"         // optional: auto-detected from EPUB metadata if omitted
+});
+
+// result.chapters is an array of [filename, markdownContent] pairs
+for (const [filename, content] of result?.chapters ?? []) {
+  console.log(filename); // e.g. "chapters/01-introduction.md"
+}
+```
+
+### Output Directory Structure
+
+```
+my-book/
+├── README.md                    # Table of contents with links to all chapters
+├── front-matter/
+│   ├── cover.md
+│   └── preface.md
+├── chapters/
+│   ├── 01-introduction.md
+│   ├── 02-the-journey.md
+│   └── ...
+├── back-matter/
+│   ├── appendix.md
+│   └── index.md
+└── assets/
+    ├── cover.jpg
+    └── figure-1.png
+```
+
+### EPUB Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `split_by_chapter` | `boolean` | `false` | Split into per-chapter files |
+| `chapters_output_dir` | `string` | `"./chapters"` | Output directory for chapter files |
+| `save_images` | `boolean` | `false` | Extract and save embedded images |
+| `language` | `string` | auto-detect | BCP-47 language code (e.g. `"en"`, `"zh-Hans"`) |
+| `no_organize` | `boolean` | `false` | Disable front/back-matter organization |
+
+### Supported Languages
+
+The converter includes chapter-heading patterns for 11 languages:
+
+| Language | Code | Chapter Pattern Example |
+|----------|------|------------------------|
+| English | `en` | `Chapter 1`, `Part II` |
+| German | `de` | `Kapitel 1`, `Teil I` |
+| French | `fr` | `Chapitre 1`, `Partie I` |
+| Italian | `it` | `Capitolo 1`, `Parte I` |
+| Spanish | `es` | `Capítulo 1`, `Parte I` |
+| Portuguese | `pt` | `Capítulo 1`, `Parte I` |
+| Russian | `ru` | `Глава 1`, `Часть I` |
+| Japanese | `ja` | `第1章`, `第1節` |
+| Korean | `ko` | `제1장`, `제1절` |
+| Chinese (Simplified) | `zh-Hans` | `第1章`, `第一章` |
+| Chinese (Traditional) | `zh-Hant` | `第1章`, `第一章` |
+
+**Language auto-detection** uses a three-tier priority:
+1. `<package xml:lang>` attribute in the OPF file
+2. `<html xml:lang>` in spine HTML files  
+3. Character frequency sampling (distinguishes zh-Hans vs zh-Hant)
+
+**CJK filename mode**: Japanese, zh-Hans, and zh-Hant configs use the full chapter title as the filename (e.g. `第三章-はじめに.md`) instead of a numeric prefix.
+
 ## YouTube Transcript Support
 
 When converting YouTube files, you can pass the `enableYoutubeTranscript` and the `youtubeTranscriptLanguage` option to control the transcript extraction. By default it will use `"en"` if the `youtubeTranscriptLanguage` is not provided.
@@ -161,11 +253,13 @@ export type ConverterResult =
       markdown: string;
       /** @deprecated Use `markdown` instead. */
       text_content: string;
+      /** Present when split_by_chapter is true: list of [filepath, content] pairs */
+      chapters?: [string, string][];
     }
   | null
   | undefined;
 
-export type ConverterOption = {
+export type ConverterOptions = {
   // Required when using convertBuffer
   file_extension?: string;
 
@@ -188,6 +282,13 @@ export type ConverterOption = {
 
   // Options for .zip conversion
   cleanupExtracted?: boolean; // Default: true
+
+  // EPUB-specific options
+  split_by_chapter?: boolean;     // Split into per-chapter files
+  chapters_output_dir?: string;   // Output directory (default: "./chapters")
+  save_images?: boolean;          // Extract and save embedded images
+  language?: string;              // BCP-47 language code (auto-detected if omitted)
+  no_organize?: boolean;          // Disable front/back-matter categorization
 };
 ```
 

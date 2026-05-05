@@ -65,7 +65,7 @@ const DEFAULT_LANG_CONFIG: LangConfig = {
 // Helper utilities
 // ---------------------------------------------------------------------------
 
-function normalizeLangCode(language: string): string {
+export function normalizeLangCode(language: string): string {
   const code = language.trim().toLowerCase().replace(/_/g, "-");
   if (code.startsWith("zh")) {
     if (code.includes("hant") || code.includes("tw") || code.includes("hk") || code.includes("mo")) {
@@ -76,7 +76,7 @@ function normalizeLangCode(language: string): string {
   return code.split("-")[0];
 }
 
-function loadLangConfig(language: string): LangConfig {
+export function loadLangConfig(language: string): LangConfig {
   const langCode = normalizeLangCode(language);
   const langFile = path.join(_dirname, "epub_languages", `${langCode}.json`);
   if (fs.existsSync(langFile)) {
@@ -118,7 +118,7 @@ function kanjiToInt(text: string): number {
   return 0;
 }
 
-function normalizePythonFlags(flags: string[]): string {
+export function normalizePythonFlags(flags: string[]): string {
   return flags
     .map((f) => {
       switch (f.toUpperCase()) {
@@ -143,7 +143,7 @@ function slugify(text: string): string {
   return s;
 }
 
-function makeFilenameStem(text: string): string {
+export function makeFilenameStem(text: string): string {
   let s = text.replace(/[/\\:*?"<>|\x00-\x1f]/g, "");
   s = s.replace(/[\s\u3000]+/g, "-").replace(/^-+|-+$/g, "");
   try {
@@ -160,7 +160,7 @@ function makeFilenameStem(text: string): string {
   return s;
 }
 
-function makeCjkFilenameStem(text: string): string {
+export function makeCjkFilenameStem(text: string): string {
   let s = text.replace(/[\r\n]+/g, " ");
   s = s.replace(/[ \t\u3000]+/g, " ").trim();
   s = s.replace(/[/\\:*?"<>|\x00-\x1f]/g, "");
@@ -209,7 +209,7 @@ function getEpubType(htmlContent: string): string | null {
   return null;
 }
 
-function getChapterTitle(htmlContent: string): string {
+export function getChapterTitle(htmlContent: string): string {
   const dom = new JSDOM(htmlContent);
   const doc = dom.window.document;
   // 1. Semantic headings
@@ -232,7 +232,7 @@ function getChapterTitle(htmlContent: string): string {
   return "";
 }
 
-function isNoiseItem(stemHint: string, fileStem: string): boolean {
+export function isNoiseItem(stemHint: string, fileStem: string): boolean {
   const s = stemHint
     .toLowerCase()
     .replace(/\.[^.]+$/, "")
@@ -242,7 +242,7 @@ function isNoiseItem(stemHint: string, fileStem: string): boolean {
   return SKIP_BASENAMES.has(s) || SKIP_BASENAMES.has(fs) || SKIP_BASENAMES.has(sBase);
 }
 
-function epubTypeToSubdir(
+export function epubTypeToSubdir(
   epubType: string | null,
   stemHint: string,
   title: string,
@@ -311,7 +311,7 @@ interface ChapterCounter {
   seen: Record<number, number>;
 }
 
-function mapToOutputFilename(
+export function mapToOutputFilename(
   title: string,
   stemHint: string,
   subdir: string,
@@ -502,7 +502,7 @@ function htmlToMarkdown(htmlContent: string): string {
   return new CustomTurnDown().convert_soup(body ?? doc.documentElement);
 }
 
-function detectZhVariant(
+export function detectZhVariant(
   fileMap: Map<string, Buffer>,
   opfDom: Document
 ): string {
