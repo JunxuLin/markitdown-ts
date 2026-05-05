@@ -1,0 +1,44 @@
+{
+  "_comment": "Chinese (Simplified) EPUB language config.",
+  "chapter_filename_use_title": true,
+  "chapter_patterns": [
+    {
+      "regex": "^第\\s*(\\d+)\\s*章[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*(\\d+)\\s*部分?[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*([一二三四五六七八九十]+)\\s*章[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*([一二三四五六七八九十]+)\\s*部分?[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "序", "序言", "前言", "绪论", "引言", "题词", "献词", "扉页", "版权", "版权页", "出版信息",
+    "重要提示", "本书所获赞誉", "赞誉"
+  ],
+  "back_matter_titles": [
+    "后记", "致谢", "更多信息", "关于作者", "参考文献", "参考资料", "索引", "附录", "尾声",
+    "注释", "延伸阅读", "推荐阅读", "版权声明", "联络方式",
+    "章节要点", "日程表模板", "分心跟踪器", "本书更多资源",
+    "你喜欢这本书吗", "书友会讨论指南", "训练手册"
+  ],
+  "skip_titles": ["目录", "导航", "目次"],
+  "skip_title_patterns": [
+    "^第[一二三四五六七八九十\\d]+部分"
+  ]
+}

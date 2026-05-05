@@ -16,6 +16,7 @@ import { WavConverter } from "./converters/wav";
 import { Mp3Converter } from "./converters/mp3";
 import { ImageConverter } from "./converters/image";
 import { ZipConverter } from "./converters/zip";
+import { EpubConverter } from "./converters/epub";
 
 export class MarkItDown {
   private readonly converters: Array<DocumentConverter> = [];
@@ -34,6 +35,7 @@ export class MarkItDown {
     this.register_converter(new ImageConverter());
     this.register_converter(new IpynbConverter());
     this.register_converter(new PdfConverter());
+    this.register_converter(new EpubConverter());
     this.register_converter(new ZipConverter());
   }
 

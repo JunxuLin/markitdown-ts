@@ -1,0 +1,47 @@
+{
+  "_comment": "Japanese EPUB language config. Chapters use '第N章', fullwidth digits, or Roman numeral parts.",
+  "chapter_patterns": [
+    {
+      "regex": "^第\\s*(\\d+)\\s*章[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*(\\d+)\\s*節[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*(\\d+)\\s*部[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^([１-９][０-９]?)[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.．]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "表紙", "目次", "はじめに", "まえがき", "序文", "序章", "序", "著者について",
+    "あとがきにかえて", "プロローグ", "凡例"
+  ],
+  "back_matter_titles": [
+    "あとがき", "付録", "索引", "参考文献", "注", "謝辞", "エピローグ",
+    "解説", "著者について", "著者紹介", "奥付", "著作権", "初出"
+  ],
+  "skip_titles": ["目次", "もくじ"],
+  "skip_title_patterns": [
+    "^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹ]+[　\\s]"
+  ]
+}

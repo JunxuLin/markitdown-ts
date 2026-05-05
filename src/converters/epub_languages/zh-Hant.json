@@ -1,0 +1,44 @@
+{
+  "_comment": "Chinese (Traditional) EPUB language config — used for zh-TW, zh-HK, zh-Hant tags.",
+  "chapter_filename_use_title": true,
+  "chapter_patterns": [
+    {
+      "regex": "^第\\s*(\\d+)\\s*章[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*(\\d+)\\s*部分?[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*([一二三四五六七八九十]+)\\s*章[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^第\\s*([一二三四五六七八九十]+)\\s*部分?[　\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "序", "序言", "前言", "緒論", "引言", "題詞", "獻詞", "扉頁", "版權", "版權頁", "出版資訊", "推薦序",
+    "重要提示", "本書所獲讚譽", "讚譽", "導讀"
+  ],
+  "back_matter_titles": [
+    "後記", "致謝", "更多信息", "關於作者", "參考文獻", "參考資料", "索引", "附錄", "尾聲",
+    "注釋", "延伸閱讀", "推薦閱讀", "版權聲明", "聯絡方式", "作者簡介",
+    "章節要點", "日程表模板", "分心跟蹤器", "本書更多資源",
+    "你喜歡這本書嗎", "書友會討論指南", "訓練手冊", "配套資源", "圖書在版", "CIP"
+  ],
+  "skip_titles": ["目錄", "導覽", "導航", "目次"],
+  "skip_title_patterns": [
+    "^第[一二三四五六七八九十\\d]+部分"
+  ]
+}

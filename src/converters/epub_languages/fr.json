@@ -1,0 +1,26 @@
+{
+  "_comment": "French EPUB language config. Chapters use 'Chapitre N' or named chapters.",
+  "chapter_patterns": [
+    {
+      "regex": "^(?:Chapitre|Chap\\.)\\s+(\\d+)[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.:]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "Titre", "Couverture", "Dédicace", "Épigraphe", "Préface", "Avant-propos",
+    "Introduction", "Exergue", "L'auteur", "À propos de l'auteur", "Du même auteur"
+  ],
+  "back_matter_titles": [
+    "Épilogue", "Notes", "Bibliographie", "Index", "Remerciements",
+    "Annexe", "Glossaire", "Table des matières", "Présentation"
+  ],
+  "skip_titles": ["Table des matières", "Sommaire"]
+}

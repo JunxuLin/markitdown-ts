@@ -7,6 +7,8 @@ export type ConverterResult =
       markdown: string;
       /** @deprecated Use `markdown` instead. */
       text_content: string;
+      /** EPUB chapter output: array of [filename, markdown] tuples */
+      chapters?: [string, string][];
     }
   | null
   | undefined;
@@ -22,6 +24,12 @@ export type ConverterOptions = {
   cleanupExtracted?: boolean;
   //
   _parent_converters?: DocumentConverter[];
+  // EPUB-specific options
+  split_by_chapter?: boolean;
+  chapters_output_dir?: string;
+  save_images?: boolean | string;
+  no_organize?: boolean;
+  language?: string;
 } & MammothOptions;
 
 type MammothOptions = Parameters<typeof mammoth.convertToHtml>[1];

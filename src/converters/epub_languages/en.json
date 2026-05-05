@@ -1,0 +1,14 @@
+{
+  "_comment": "English EPUB language config. chapter_patterns are tried in order; first match wins.",
+  "chapter_patterns": [
+    {
+      "regex": "^(?:chapter\\s+)?(\\d+)\\s*[.:]?\\s*(.+)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [],
+  "back_matter_titles": [],
+  "skip_titles": []
+}

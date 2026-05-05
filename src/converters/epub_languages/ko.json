@@ -1,0 +1,27 @@
+{
+  "_comment": "Korean EPUB language config. Chapters use '제N장' or 'N. title'.",
+  "chapter_patterns": [
+    {
+      "regex": "^제\\s*(\\d+)\\s*장[\\s]*(.*)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.·]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "들어가며", "서문", "머리말", "서론", "서장", "저자 소개", "저자소개",
+    "이 책을 읽는 분들께", "추천사", "추천의 글", "프롤로그",
+    "미리 읽어 보기"
+  ],
+  "back_matter_titles": [
+    "참고 문헌", "참고문헌", "단어 목록", "찾아보기", "색인", "부록",
+    "에필로그", "맺음말", "감사의 글", "저자 소개"
+  ],
+  "skip_titles": ["목차", "차례", "목록"]
+}

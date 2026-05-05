@@ -1,0 +1,39 @@
+{
+  "_comment": "Italian EPUB language config. Chapters use 'Capitolo N' or Roman numerals I., II., etc.",
+  "chapter_patterns": [
+    {
+      "regex": "^(?:Capitolo|Cap\\.)\\s+(\\d+)[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^Canto\\s+(?=[MDCLXVI])(M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(?=[MDCLXVI])(M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))(?![\\w])[.\\s]+(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.:]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "Titolo", "Copertina", "Dedica", "Prefazione", "Introduzione",
+    "Premessa", "Presentazione", "Prologo", "Dell'autore", "Nota dell'autore",
+    "Biblioteca Ideale Giunti"
+  ],
+  "back_matter_titles": [
+    "Epilogo", "Note", "Bibliografia", "Indice", "Ringraziamenti",
+    "Appendice", "Glossario", "Postfazione", "Dell'autore"
+  ],
+  "skip_titles": ["Indice", "Sommario", "Contenuti"]
+}

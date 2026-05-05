@@ -1,0 +1,26 @@
+{
+  "_comment": "German EPUB language config. Chapters typically use 'Kapitel N' or just 'N'.",
+  "chapter_patterns": [
+    {
+      "regex": "^Kapitel\\s+(\\d+)[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.:]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "Titelseite", "Impressum", "Inhaltsverzeichnis", "Widmung", "Vorwort", "Einleitung",
+    "Prolog", "Vorrede", "Geleitwort"
+  ],
+  "back_matter_titles": [
+    "Epilog", "Anhang", "Nachwort", "Danksagung", "Literatur", "Bibliografie",
+    "Register", "Index", "Anmerkungen", "Über den Autor", "Über die Autorin"
+  ],
+  "skip_titles": ["Inhaltsverzeichnis", "Inhaltsangabe"]
+}

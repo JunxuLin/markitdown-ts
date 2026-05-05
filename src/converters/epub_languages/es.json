@@ -1,0 +1,32 @@
+{
+  "_comment": "Spanish EPUB language config. Chapters use 'Capítulo N'.",
+  "chapter_patterns": [
+    {
+      "regex": "^(?:Cap[íi]tulo|Cap\\.)\\s+(\\d+)[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(?:Cap[íi]tulo|Cap\\.)\\s+(?=[MDCLXVI])(M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.:]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "Portada", "Título", "Metadatos", "Dedicatoria", "Prólogo", "Prefacio",
+    "Introducción", "Presentación", "Sobre el autor", "Sobre la autora"
+  ],
+  "back_matter_titles": [
+    "Epílogo", "Notas", "Bibliografía", "Índice", "Agradecimientos",
+    "Apéndice", "Glosario", "Sobre el autor", "Sobre la autora"
+  ],
+  "skip_titles": ["Índice", "Contenido", "Tabla de contenidos"]
+}

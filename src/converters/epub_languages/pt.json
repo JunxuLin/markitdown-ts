@@ -1,0 +1,40 @@
+{
+  "_comment": "Portuguese EPUB language config. Chapters use 'Capítulo N'.",
+  "chapter_patterns": [
+    {
+      "regex": "^(?:Cap[íi]tulo|Cap\\.)\\s+(\\d+)[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(?:Cap[íi]tulo|Cap\\.)\\s+(?=[MDCLXVI])(M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(?=[MDCLXVI])(M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))(?![\\w])[.:\\s]*(.*)$",
+      "flags": ["IGNORECASE"],
+      "num_group": 1,
+      "rest_group": 2
+    },
+    {
+      "regex": "^(\\d+)\\s*[.:]\\s*(.+)$",
+      "flags": [],
+      "num_group": 1,
+      "rest_group": 2
+    }
+  ],
+  "front_matter_titles": [
+    "Folha de rosto", "Dedicatória", "Prefácio", "Introdução",
+    "Apresentação", "Sobre o autor", "Sobre a autora", "Nota do autor"
+  ],
+  "back_matter_titles": [
+    "Epílogo", "Notas", "Referências", "Índice", "Agradecimentos",
+    "Apêndice", "Glossário", "Posfácio", "Sobre o autor", "Sobre a autora",
+    "Fim do primeiro volume", "Fim do segundo volume", "Fim do terceiro volume",
+    "Lista de erros corrigidos"
+  ],
+  "skip_titles": ["Índice", "Sumário", "Conteúdo"]
+}
